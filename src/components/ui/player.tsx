@@ -44,7 +44,7 @@ export function Player({
       }`}
     >
       <Dialog>
-        <DialogTrigger className="w-full">
+        <DialogTrigger className="w-full truncate">
           <Card className="overflow-hidden">
             <CardHeader
               className={`p-2 flex-row items-center justify-between rounded-lg bg-gray-300 ${
@@ -53,9 +53,9 @@ export function Player({
             >
               <CardTitle className="flex gap-3 text-xl items-center">
                 <div className="bg-gray-200 p-2 rounded-full">
-                  {eliminatedPlayer ? "Jogador eliminado" : `${rank + 1}º`}
+                  {eliminatedPlayer ? "Eliminado" : `${rank + 1}º`}
                 </div>
-                <span>{playerName}</span>
+                <span className="">{playerName}</span>
               </CardTitle>
             </CardHeader>
 
