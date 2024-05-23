@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { Button } from "./button";
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
 import {
@@ -95,7 +96,7 @@ export function Player({
 
       <Button
         onClick={handleRemovePlayer}
-        className="text-red-900 font-medium text-xl bg-red-500 h-full hover:bg-red-600 hover:no-underline"
+        className="text-red-900 text-xl font-bold bg-red-500 h-full hover:bg-red-600 hover:no-underline"
       >
         X
       </Button>

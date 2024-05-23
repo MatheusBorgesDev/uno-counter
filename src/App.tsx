@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
+
+import { SlGameController } from "react-icons/sl";
+import { FaPlus } from "react-icons/fa";
+
 import logo from "../public/uno-logo.svg";
+
 import { Button } from "./components/ui/button";
 import { Player } from "./components/ui/player";
 import {
@@ -103,8 +108,8 @@ export function App() {
 
           <Dialog>
             <DialogTrigger className="w-full">
-              <Button className="w-full bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600">
-                Novo jogador +
+              <Button className="w-full flex gap-2 bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600">
+                <span>Novo jogador</span> <FaPlus />
               </Button>
             </DialogTrigger>
             <DialogContent className=" h-52 w-[25rem] rounded-xl">
@@ -119,8 +124,11 @@ export function App() {
                   onChange={(e) => setNewPlayerName(e.target.value)}
                 />
                 <DialogClose className="w-full">
-                  <Button className="w-full" type="submit">
-                    +
+                  <Button
+                    className="w-full flex gap-2 bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600"
+                    type="submit"
+                  >
+                    <FaPlus />
                   </Button>
                 </DialogClose>
               </form>
@@ -129,18 +137,25 @@ export function App() {
         </div>
 
         <div className="flex flex-col gap-2 my-3">
-          {sortedPlayers.map((player, index) => (
-            <Player
-              key={index}
-              rank={index}
-              playerName={player.playerName}
-              pointsAmount={player.pointsAmount}
-              handleRemovePlayer={() => onRemovePlayer(player.playerName)}
-              handleAddPoints={(points) =>
-                onAddPoints(player.playerName, points)
-              }
-            />
-          ))}
+          {sortedPlayers.length == 0 ? (
+            <div className="flex flex-col items-center mt-16 gap-8 opacity-60">
+              <SlGameController size={100} />
+              <p className="text-xl font-medium">Adicione novos jogadores!</p>
+            </div>
+          ) : (
+            sortedPlayers.map((player, index) => (
+              <Player
+                key={index}
+                rank={index}
+                playerName={player.playerName}
+                pointsAmount={player.pointsAmount}
+                handleRemovePlayer={() => onRemovePlayer(player.playerName)}
+                handleAddPoints={(points) =>
+                  onAddPoints(player.playerName, points)
+                }
+              />
+            ))
+          )}
         </div>
       </main>
     </div>
