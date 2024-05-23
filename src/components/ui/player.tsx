@@ -50,7 +50,7 @@ export function Player({
             >
               <CardTitle className="flex gap-3 text-xl items-center">
                 <div className="bg-gray-200 p-2 rounded-full">
-                  {pointsAmount > 500 ? "Jogador eliminado" : `${rank + 1}º`}
+                  {pointsAmount >= 500 ? "Jogador eliminado" : `${rank + 1}º`}
                 </div>
                 <span>{playerName}</span>
               </CardTitle>
