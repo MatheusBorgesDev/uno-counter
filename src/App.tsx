@@ -90,7 +90,7 @@ export function App() {
   }, [players]);
 
   return (
-    <div className="h-full min-h-screen flex flex-col items-center bg-gray-900 text-gray-100">
+    <div className="min-h-screen flex flex-col items-center bg-gray-900 text-gray-100">
       <header className="w-full flex items-center justify-center gap-2 border-b border-white p-3">
         <img src={logo} alt="Logo original do UNO" width={100} />
         <h1 className="text-xl text-gray-300 uppercase font-medium">
@@ -138,7 +138,7 @@ export function App() {
           </Dialog>
         </div>
 
-        <div className="flex flex-col gap-2 my-3">
+        <div className="flex flex-col gap-4 my-3 h-full">
           {sortedPlayers.length == 0 ? (
             <div className="flex flex-col items-center mt-16 gap-8 opacity-60">
               <SlGameController size={100} />

@@ -61,8 +61,10 @@ export function Player({
 
             <CardContent className="p-2 flex justify-center gap-4">
               <div className="flex flex-col items-center">
-                <p className="font-medium">Pontos acumulados</p>
-                <span className="font-bold ">{pointsAmount}</span>
+                <p className="font-medium">Pontuação</p>
+                <span className="font-bold bg-gray-900 text-gray-100 w-10 rounded-full">
+                  {pointsAmount}
+                </span>
               </div>
 
               <div className="w-1 border-2 rounded-full" />
