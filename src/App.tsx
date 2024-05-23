@@ -92,8 +92,10 @@ export function App() {
   return (
     <div className="h-full min-h-screen flex flex-col items-center bg-gray-900 text-gray-100">
       <header className="w-full flex items-center justify-center gap-2 border-b border-white p-3">
-        <img src={logo} alt="Logo original do UNO" width={150} />
-        <h1 className="text-2xl text-gray-300 uppercase">Contador de pontos</h1>
+        <img src={logo} alt="Logo original do UNO" width={100} />
+        <h1 className="text-xl text-gray-300 uppercase font-medium">
+          Contador de pontos
+        </h1>
       </header>
 
       <main className="flex flex-col gap-3 flex-1 w-[90%] mx-auto h-auto my-8 max-w-[50rem]">

@@ -9,6 +9,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "./input";
+import { FaPlus } from "react-icons/fa";
 
 interface PlayerProps {
   rank: number;
@@ -76,7 +77,7 @@ export function Player({
           </Card>
         </DialogTrigger>
 
-        <DialogContent className="w-64 h-52 rounded-lg">
+        <DialogContent className="flex flex-col gap-3 justify-center w-64 h-52 rounded-lg">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center justify-center gap-3 w-full"
@@ -88,8 +89,11 @@ export function Player({
               placeholder="Adicionar pontos"
             />
             <DialogClose className="w-full">
-              <Button className="w-full" type="submit">
-                Adicionar
+              <Button
+                className="w-full flex gap-2 bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600"
+                type="submit"
+              >
+                <FaPlus />
               </Button>
             </DialogClose>
           </form>
