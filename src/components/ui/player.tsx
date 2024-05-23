@@ -31,13 +31,15 @@ export function Player({
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     handleAddPoints(newPoints);
-    setNewPoints(0); // Reset the input field
+    setNewPoints(0);
   }
+
+  const eliminatedPlayer = pointsAmount >= 500;
 
   return (
     <div
       className={`flex items-center gap-3 h-32 ${
-        pointsAmount >= 500 && "opacity-60"
+        eliminatedPlayer && "opacity-60"
       }`}
     >
       <Dialog>
@@ -45,12 +47,12 @@ export function Player({
           <Card className="overflow-hidden">
             <CardHeader
               className={`p-2 flex-row items-center justify-between rounded-lg bg-gray-300 ${
-                pointsAmount >= 500 && "bg-red-400"
+                eliminatedPlayer && "bg-red-400"
               }`}
             >
               <CardTitle className="flex gap-3 text-xl items-center">
                 <div className="bg-gray-200 p-2 rounded-full">
-                  {pointsAmount >= 500 ? "Jogador eliminado" : `${rank + 1}º`}
+                  {eliminatedPlayer ? "Jogador eliminado" : `${rank + 1}º`}
                 </div>
                 <span>{playerName}</span>
               </CardTitle>
