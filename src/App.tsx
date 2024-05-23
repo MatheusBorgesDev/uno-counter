@@ -112,7 +112,7 @@ export function App() {
                 <span>Novo jogador</span> <FaPlus />
               </Button>
             </DialogTrigger>
-            <DialogContent className=" h-52 w-[25rem] rounded-xl">
+            <DialogContent className="h-52 max-w-[25rem] rounded-xl">
               <form
                 onSubmit={handleNewPlayer}
                 className="flex flex-col items-center justify-center gap-3 w-full"

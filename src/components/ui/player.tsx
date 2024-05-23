@@ -26,7 +26,7 @@ export function Player({
   handleAddPoints,
 }: PlayerProps) {
   const pointsToLoseGame = 500 - pointsAmount;
-  const [newPoints, setNewPoints] = useState<number>(0);
+  const [newPoints, setNewPoints] = useState(0);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -76,7 +76,7 @@ export function Player({
           </Card>
         </DialogTrigger>
 
-        <DialogContent>
+        <DialogContent className="w-64 h-52 rounded-lg">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center justify-center gap-3 w-full"
