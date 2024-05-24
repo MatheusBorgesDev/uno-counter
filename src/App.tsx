@@ -1,19 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { SlGameController } from "react-icons/sl";
-import { FaPlus } from "react-icons/fa";
-
-import logo from "../public/uno-logo.svg";
 
 import { Button } from "./components/ui/button";
 import { Player } from "./components/ui/player";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
-import { Input } from "./components/ui/input";
+
+import { Header } from "./components/ui/header";
+import { NewPlayerButton } from "./components/ui/newPlayerButton";
 
 interface Players {
   playerName: string;
@@ -33,7 +26,7 @@ export function App() {
     setPlayers(resetedPlayersPoints);
   }
 
-  function handleNewPlayer(e: React.FormEvent) {
+  function onNewPlayer(e: React.FormEvent) {
     e.preventDefault();
     if (newPlayerName === "") {
       return;
@@ -91,12 +84,7 @@ export function App() {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-900 text-gray-100">
-      <header className="w-full flex items-center justify-center gap-2 border-b border-white p-3">
-        <img src={logo} alt="Logo original do UNO" width={100} />
-        <h1 className="text-xl text-gray-300 uppercase font-medium">
-          Contador de pontos
-        </h1>
-      </header>
+      <Header />
 
       <main className="flex flex-col gap-3 flex-1 w-[90%] mx-auto h-auto my-8 max-w-[50rem]">
         <div className="flex gap-3 justify-between">
@@ -108,34 +96,11 @@ export function App() {
             Novo jogo
           </Button>
 
-          <Dialog>
-            <DialogTrigger className="w-full">
-              <Button className="w-full flex gap-2 bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600">
-                <span>Novo jogador</span> <FaPlus />
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="h-52 max-w-[25rem] rounded-xl">
-              <form
-                onSubmit={handleNewPlayer}
-                className="flex flex-col items-center justify-center gap-3 w-full"
-              >
-                <Input
-                  type="text"
-                  placeholder="Nome do novo jogador"
-                  value={newPlayerName}
-                  onChange={(e) => setNewPlayerName(e.target.value)}
-                />
-                <DialogClose className="w-full">
-                  <Button
-                    className="w-full flex gap-2 bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600"
-                    type="submit"
-                  >
-                    <FaPlus />
-                  </Button>
-                </DialogClose>
-              </form>
-            </DialogContent>
-          </Dialog>
+          <NewPlayerButton
+            handleNewPlayer={onNewPlayer}
+            newPlayerName={newPlayerName}
+            setNewPlayerName={setNewPlayerName}
+          />
         </div>
 
         <div className="flex flex-col gap-4 my-3 h-full">
