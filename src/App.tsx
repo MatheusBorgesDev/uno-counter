@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 
 import { SlGameController } from "react-icons/sl";
 
-import { Button } from "./components/ui/button";
 import { Player } from "./components/ui/player";
 
 import { Header } from "./components/ui/header";
 import { NewPlayerButton } from "./components/ui/newPlayerButton";
+import { NewGameButton } from "./components/ui/newGameButton";
 
-interface Players {
+export interface Players {
   playerName: string;
   pointsAmount: number;
 }
@@ -18,7 +18,7 @@ export function App() {
 
   const [newPlayerName, setNewPlayerName] = useState("");
 
-  function handleNewGame() {
+  function onNewGame() {
     const resetedPlayersPoints = players.map((player) => ({
       ...player,
       pointsAmount: 0,
@@ -88,13 +88,7 @@ export function App() {
 
       <main className="flex flex-col gap-3 flex-1 w-[90%] mx-auto h-auto my-8 max-w-[50rem]">
         <div className="flex gap-3 justify-between">
-          <Button
-            onClick={handleNewGame}
-            disabled={players.length === 0}
-            className="w-full bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600"
-          >
-            Novo jogo
-          </Button>
+          <NewGameButton handleNewGame={onNewGame} players={players} />
 
           <NewPlayerButton
             handleNewPlayer={onNewPlayer}
