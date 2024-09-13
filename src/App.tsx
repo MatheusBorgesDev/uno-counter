@@ -100,7 +100,7 @@ export function App() {
   }, [players]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-slate-900 text-slate-100">
+    <div className="min-h-screen flex flex-col items-center bg-slate-700 text-slate-100">
       <Header />
       <main className="flex flex-col gap-3 w-[90%] mx-auto my-8 max-w-[50rem] ">
         <div className="flex gap-3 justify-between">
