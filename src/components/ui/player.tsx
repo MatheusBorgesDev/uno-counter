@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "./input";
 import { FaPlus } from "react-icons/fa";
-import { Check, X } from "lucide-react";
+import { Check, Trophy, X } from "lucide-react";
 
 interface PlayerProps {
   rank: number;
@@ -53,7 +53,7 @@ export function Player({
         <DialogTrigger className="w-full truncate" disabled={eliminatedPlayer}>
           <Card className="overflow-hidden ">
             <CardHeader
-              className={`p-2 flex-row items-center justify-between rounded-lg bg-gray-300 ${
+              className={`p-2 flex-row items-center justify-between rounded-t-lg bg-gray-300 ${
                 eliminatedPlayer && "bg-red-400"
               }`}
             >
@@ -108,11 +108,14 @@ export function Player({
           </Card>
         </DialogTrigger>
 
-        <DialogContent className="flex flex-col gap-3 justify-center w-64 h-52 rounded-lg">
+        <DialogContent className="flex flex-col gap-3 w-80 rounded-lg">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center justify-center gap-3 w-full"
           >
+            <label htmlFor="points" className="font-medium">
+              Quantos pontos {playerName} recebeu?
+            </label>
             <Input
               type="number"
               value={newPoints}
@@ -123,11 +126,20 @@ export function Player({
             />
             <DialogClose className="w-full">
               <Button
-                className="w-full flex gap-2 bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600"
+                variant="destructive"
+                className="w-full flex gap-2  text-gray-900 text-md font-medium "
                 type="submit"
-                disabled={eliminatedPlayer}
               >
-                <FaPlus />
+                <FaPlus /> Adicionar
+              </Button>
+            </DialogClose>
+
+            <DialogClose className="w-full">
+              <Button
+                className="w-full flex gap-2 bg-green-500 hover:bg-green-500/80 text-gray-900 text-md font-medium "
+                type="submit"
+              >
+                <Trophy /> Venceu a rodada
               </Button>
             </DialogClose>
           </form>
@@ -153,6 +165,7 @@ export function Player({
                 Cancelar
               </Button>
             </DialogClose>
+
             <DialogClose>
               <Button
                 className="bg-red-500 text-gray-100 font-medium"
