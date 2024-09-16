@@ -1,5 +1,5 @@
+import { usePlayers } from "@/contexts/hooks/players-context";
 import { Button } from "./button";
-import { usePlayers } from "@/contexts/players-context";
 
 export function NewGameButton() {
   const { startNewGame, players } = usePlayers();

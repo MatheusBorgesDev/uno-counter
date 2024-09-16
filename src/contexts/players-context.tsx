@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export interface PlayerType {
   rank?: number;
@@ -118,12 +118,4 @@ export function PlayersProvider({ children }: PlayersProviderProps) {
       {children}
     </PlayersContext.Provider>
   );
-}
-
-export function usePlayers() {
-  const context = useContext(PlayersContext);
-  if (!context) {
-    throw new Error("useMyContext must be used within a MyProvider");
-  }
-  return context;
 }

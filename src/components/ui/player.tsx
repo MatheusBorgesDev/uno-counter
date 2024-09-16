@@ -10,7 +10,8 @@ import {
 import { Input } from "./input";
 import { FaPlus } from "react-icons/fa";
 import { Check, X } from "lucide-react";
-import { PlayerType, usePlayers } from "@/contexts/players-context";
+import { PlayerType } from "@/contexts/players-context";
+import { usePlayers } from "@/contexts/hooks/players-context";
 
 export function Player({
   rank,

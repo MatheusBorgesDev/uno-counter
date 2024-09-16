@@ -3,7 +3,7 @@ import { Player } from "./components/ui/player";
 import { Header } from "./components/ui/header";
 import { NewPlayerButton } from "./components/ui/newPlayerButton";
 import { NewGameButton } from "./components/ui/newGameButton";
-import { usePlayers } from "./contexts/players-context";
+import { usePlayers } from "./contexts/hooks/players-context";
 
 export function App() {
   const { players, roundNumber } = usePlayers();

@@ -2,7 +2,7 @@ import { FaPlus } from "react-icons/fa";
 import { Button } from "./button";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "./dialog";
 import { Input } from "./input";
-import { usePlayers } from "@/contexts/players-context";
+import { usePlayers } from "@/contexts/hooks/players-context";
 
 export function NewPlayerButton() {
   const { addNewPlayer, newPlayerName, setNewPlayerName } = usePlayers();
