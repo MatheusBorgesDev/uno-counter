@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "./input";
 import { FaPlus } from "react-icons/fa";
-import { Check, X } from "lucide-react";
+import { Check, Trophy, X } from "lucide-react";
 import { PlayerType } from "@/contexts/players-context";
 import { usePlayers } from "@/contexts/hooks/players-context";
 
@@ -125,14 +125,15 @@ export function Player({
               </Button>
             </DialogClose>
 
-            {/* <DialogClose className="w-full">
+            <DialogClose className="w-full">
               <Button
-                className="w-full flex gap-2 bg-green-500 hover:bg-green-500/80 text-gray-900 text-md font-medium "
                 type="submit"
+                onClick={() => addPlayerPoints(playerName, 0)}
+                className="w-full flex gap-2 bg-green-500 hover:bg-green-500/80 text-gray-900 text-md font-medium "
               >
                 <Trophy /> Venceu a rodada
               </Button>
-            </DialogClose> */}
+            </DialogClose>
           </form>
         </DialogContent>
       </Dialog>
