@@ -1,15 +1,12 @@
-import { Players } from "@/App";
 import { Button } from "./button";
+import { usePlayers } from "@/contexts/players-context";
 
-interface NewGameButtonProps {
-  players: Players[];
-  handleNewGame: () => void;
-}
+export function NewGameButton() {
+  const { startNewGame, players } = usePlayers();
 
-export function NewGameButton({ players, handleNewGame }: NewGameButtonProps) {
   return (
     <Button
-      onClick={handleNewGame}
+      onClick={startNewGame}
       disabled={players.length === 0}
       className="w-full bg-green-500 text-gray-900 text-lg font-medium hover:bg-green-600"
     >

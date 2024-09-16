@@ -1,73 +1,12 @@
-import { useEffect, useState } from "react";
 import { SlGameController } from "react-icons/sl";
 import { Player } from "./components/ui/player";
 import { Header } from "./components/ui/header";
 import { NewPlayerButton } from "./components/ui/newPlayerButton";
 import { NewGameButton } from "./components/ui/newGameButton";
-
-export interface Players {
-  playerName: string;
-  pointsAmount: number;
-  isPointsScored: boolean;
-}
+import { usePlayers } from "./contexts/players-context";
 
 export function App() {
-  const [players, setPlayers] = useState<Players[]>([]);
-  const [newPlayerName, setNewPlayerName] = useState("");
-  const [roundNumber, setRoundNumber] = useState(1);
-
-  function onNewGame() {
-    const resetedPlayersPoints = players.map((player) => ({
-      ...player,
-      pointsAmount: 0,
-      isPointsScored: false,
-    }));
-    setPlayers(resetedPlayersPoints);
-    setRoundNumber(1);
-  }
-
-  function onNewPlayer(e: React.FormEvent) {
-    e.preventDefault();
-    if (newPlayerName === "") return;
-
-    const newPlayer: Players = {
-      playerName: newPlayerName,
-      pointsAmount: 0,
-      isPointsScored: false,
-    };
-
-    setPlayers([...players, newPlayer]);
-    setNewPlayerName("");
-  }
-
-  function onRemovePlayer(playerName: string) {
-    const filteredPlayers = players.filter(
-      (player) => player.playerName !== playerName
-    );
-    setPlayers(filteredPlayers);
-  }
-
-  function onAddPoints(playerName: string, points: number) {
-    const updatedPlayers = players.map((player) =>
-      player.playerName === playerName
-        ? {
-            ...player,
-            pointsAmount: player.pointsAmount + points,
-            isPointsScored: true,
-          }
-        : player
-    );
-    setPlayers(updatedPlayers);
-
-    if (updatedPlayers.every((player) => player.isPointsScored)) {
-      const resetedPlayers = updatedPlayers.map((player) => ({
-        ...player,
-        isPointsScored: false,
-      }));
-      setPlayers(resetedPlayers);
-      setRoundNumber((prevRound) => prevRound + 1);
-    }
-  }
+  const { players, roundNumber } = usePlayers();
 
   const sortedPlayers = [...players].sort((a, b) => {
     const isAEliminated = a.pointsAmount >= 500;
@@ -79,37 +18,13 @@ export function App() {
     return a.pointsAmount - b.pointsAmount;
   });
 
-  useEffect(() => {
-    const storedPlayers = localStorage.getItem("@uno-contador-players");
-    if (storedPlayers) {
-      const parsedPlayers: Players[] = JSON.parse(storedPlayers);
-      if (parsedPlayers.length > 0) {
-        setPlayers(parsedPlayers);
-      } else {
-        localStorage.removeItem("@uno-contador-players");
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    if (players.length > 0) {
-      localStorage.setItem("@uno-contador-players", JSON.stringify(players));
-    } else {
-      localStorage.removeItem("@uno-contador-players");
-    }
-  }, [players]);
-
   return (
     <div className="min-h-screen flex flex-col items-center bg-slate-700 text-slate-100">
       <Header />
       <main className="flex flex-col gap-3 w-[90%] mx-auto my-8 max-w-[50rem] ">
         <div className="flex gap-3 justify-between">
-          <NewGameButton handleNewGame={onNewGame} players={players} />
-          <NewPlayerButton
-            handleNewPlayer={onNewPlayer}
-            newPlayerName={newPlayerName}
-            setNewPlayerName={setNewPlayerName}
-          />
+          <NewGameButton />
+          <NewPlayerButton />
         </div>
 
         <div className="flex flex-col gap-4 my-3 h-full ">
@@ -129,12 +44,7 @@ export function App() {
                 rank={index}
                 playerName={player.playerName}
                 pointsAmount={player.pointsAmount}
-                handleRemovePlayer={() => onRemovePlayer(player.playerName)}
-                handleAddPoints={(points) =>
-                  onAddPoints(player.playerName, points)
-                }
                 isPointsScored={player.isPointsScored}
-                roundNumber={roundNumber}
               />
             ))
           )}

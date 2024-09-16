@@ -9,34 +9,24 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "./input";
 import { FaPlus } from "react-icons/fa";
-import { Check, Trophy, X } from "lucide-react";
-
-interface PlayerProps {
-  rank: number;
-  playerName: string;
-  pointsAmount: number;
-  handleRemovePlayer: () => void;
-  handleAddPoints: (points: number) => void;
-  isPointsScored: boolean;
-  roundNumber: number;
-}
+import { Check, X } from "lucide-react";
+import { PlayerType, usePlayers } from "@/contexts/players-context";
 
 export function Player({
   rank,
   playerName,
   pointsAmount,
-  handleRemovePlayer,
-  handleAddPoints,
   isPointsScored,
-  roundNumber,
-}: PlayerProps) {
+}: PlayerType) {
+  const { removePlayer, addPlayerPoints, roundNumber } = usePlayers();
+
   const pointsToLoseGame = 500 - pointsAmount;
   const [newPoints, setNewPoints] = useState(0);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (newPoints > 0) {
-      handleAddPoints(newPoints);
+    if (newPoints >= 0) {
+      addPlayerPoints(playerName, newPoints);
       setNewPoints(0);
     }
   }
@@ -60,7 +50,7 @@ export function Player({
               <CardTitle className="flex text-lg items-center justify-between w-full">
                 <div className="flex gap-2 items-center">
                   <div className="bg-gray-200 p-2 rounded-full flex gap-2">
-                    {eliminatedPlayer ? <X size={15} /> : `${rank + 1}º`}
+                    {eliminatedPlayer ? <X size={15} /> : `${(rank ?? 0) + 1}º`}
                   </div>
                   <span className="">{playerName}</span>
                 </div>
@@ -134,14 +124,14 @@ export function Player({
               </Button>
             </DialogClose>
 
-            <DialogClose className="w-full">
+            {/* <DialogClose className="w-full">
               <Button
                 className="w-full flex gap-2 bg-green-500 hover:bg-green-500/80 text-gray-900 text-md font-medium "
                 type="submit"
               >
                 <Trophy /> Venceu a rodada
               </Button>
-            </DialogClose>
+            </DialogClose> */}
           </form>
         </DialogContent>
       </Dialog>
@@ -157,7 +147,7 @@ export function Player({
 
         <DialogContent className="flex flex-col gap-3 justify-center w-64 h-52 rounded-lg">
           <p className="text-lg font-medium">
-            Tem certeza que deseja excluir o jogador?
+            Tem certeza que deseja excluir {playerName}?
           </p>
           <div className="flex gap-3">
             <DialogClose>
@@ -169,7 +159,7 @@ export function Player({
             <DialogClose>
               <Button
                 className="bg-red-500 text-gray-100 font-medium"
-                onClick={handleRemovePlayer}
+                onClick={() => removePlayer(playerName)}
               >
                 Excluir
               </Button>

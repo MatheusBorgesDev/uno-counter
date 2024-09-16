@@ -2,18 +2,11 @@ import { FaPlus } from "react-icons/fa";
 import { Button } from "./button";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "./dialog";
 import { Input } from "./input";
+import { usePlayers } from "@/contexts/players-context";
 
-interface NewPlayerButtonProps {
-  handleNewPlayer: (e: React.FormEvent) => void;
-  newPlayerName: string;
-  setNewPlayerName: (name: string) => void;
-}
+export function NewPlayerButton() {
+  const { addNewPlayer, newPlayerName, setNewPlayerName } = usePlayers();
 
-export function NewPlayerButton({
-  handleNewPlayer,
-  newPlayerName,
-  setNewPlayerName,
-}: NewPlayerButtonProps) {
   return (
     <Dialog>
       <DialogTrigger className="w-full">
@@ -23,12 +16,15 @@ export function NewPlayerButton({
       </DialogTrigger>
       <DialogContent className="h-52 max-w-[25rem] rounded-xl">
         <form
-          onSubmit={handleNewPlayer}
+          onSubmit={addNewPlayer}
           className="flex flex-col items-center justify-center gap-3 w-full"
         >
+          <label htmlFor="newPlayerName" className="text-lg font-medium">
+            Qual é o nome do novo jogador?
+          </label>
           <Input
             type="text"
-            placeholder="Nome do novo jogador"
+            placeholder="Escreva aqui..."
             value={newPlayerName}
             onChange={(e) => setNewPlayerName(e.target.value)}
           />
