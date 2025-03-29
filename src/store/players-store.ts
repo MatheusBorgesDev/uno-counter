@@ -1,15 +1,15 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-export interface PlayerType {
+export interface Player {
 	rank?: number;
 	playerName: string;
 	pointsAmount: number;
 	isPointsScored: boolean;
 }
 
-interface PlayersState {
-	players: PlayerType[];
+interface Players {
+	players: Player[];
 	newPlayerName: string;
 	roundNumber: number;
 	startNewGame: () => void;
@@ -19,12 +19,13 @@ interface PlayersState {
 	setNewPlayerName: (name: string) => void;
 }
 
-export const usePlayersStore = create<PlayersState>()(
+export const usePlayersStore = create<Players>()(
 	persist(
 		(set, get) => ({
 			players: [],
 			newPlayerName: "",
 			roundNumber: 1,
+
 			startNewGame: () => {
 				const resetedPlayersPoints = get().players.map((player) => ({
 					...player,
@@ -33,11 +34,12 @@ export const usePlayersStore = create<PlayersState>()(
 				}));
 				set({ players: resetedPlayersPoints, roundNumber: 1 });
 			},
+
 			addNewPlayer: (e: React.FormEvent) => {
 				e.preventDefault();
 				if (get().newPlayerName === "") return;
 
-				const newPlayer: PlayerType = {
+				const newPlayer: Player = {
 					playerName: get().newPlayerName,
 					pointsAmount: 0,
 					isPointsScored: false,
@@ -45,12 +47,14 @@ export const usePlayersStore = create<PlayersState>()(
 
 				set({ players: [...get().players, newPlayer], newPlayerName: "" });
 			},
+
 			removePlayer: (playerName: string) => {
 				const filteredPlayers = get().players.filter(
 					(player) => player.playerName !== playerName,
 				);
 				set({ players: filteredPlayers });
 			},
+
 			addPlayerPoints: (playerName: string, points: number) => {
 				const updatedPlayers = get().players.map((player) =>
 					player.playerName === playerName
@@ -71,6 +75,7 @@ export const usePlayersStore = create<PlayersState>()(
 					set({ players: resetedPlayers, roundNumber: get().roundNumber + 1 });
 				}
 			},
+
 			setNewPlayerName: (name: string) => set({ newPlayerName: name }),
 		}),
 		{
