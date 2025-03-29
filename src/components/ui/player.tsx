@@ -11,14 +11,14 @@ import { Input } from "./input";
 import { FaPlus } from "react-icons/fa";
 import { Check, Trophy, X } from "lucide-react";
 
-import { type PlayerType, usePlayersStore } from "@/store/players-store";
+import { type Player, usePlayersStore } from "@/store/players-store";
 
-export function Player({
+export function PlayerCard({
 	rank,
 	playerName,
 	pointsAmount,
 	isPointsScored,
-}: PlayerType) {
+}: Player) {
 	const { removePlayer, addPlayerPoints, roundNumber } = usePlayersStore();
 
 	const pointsToLoseGame = 500 - pointsAmount;
